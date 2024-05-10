@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FC} from 'react';
+import './styles/App.css';
+import {EnumTodoStatus} from "./types/todo-item.interface";
+import Board from "./components/Board";
+import {Typography} from "antd";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const { Title } = Typography;
+
+const App: FC = () => {
+    return (
+        <div className="App">
+            <header>
+                <Title level={3}>Salauat | Todo app using React , typescript , mobx</Title>
+            </header>
+            <div className='capitalize flex gap-2 px-5 mt-2'>
+                {Object.keys(EnumTodoStatus).map((key) => {
+                    const statusKey = key as keyof typeof EnumTodoStatus;
+                    return (
+                        <Board key={key} statusKey={statusKey}/>
+                    );
+                })}
+            </div>
+        </div>
+    );
 }
-
 export default App;
